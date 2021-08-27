@@ -38,9 +38,9 @@ export default Visualiser = React.createClass({
      */
     analyseAudioStream(analyser) {
         // Round and round we go...
-        (requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame)(function () {
-            this.analyseAudioStream.call(this, analyser);
-        }.bind(this));
+        (requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame)(() => {
+            this.analyseAudioStream(analyser);
+        });
 
         // Analyse the frequency data for the current audio track!
         const frequencyData = new Uint8Array(analyser.frequencyBinCount);

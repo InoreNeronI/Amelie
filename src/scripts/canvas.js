@@ -31,12 +31,10 @@ export default Canvas = React.createClass({
          * @return {Function}
          * @constructor
          */
-        const ColourGenerator = function ColourGenerator() {
-
+        const ColourGenerator = function() {
             const cache = [];
 
-            return function (index) {
-
+            return (index) => {
                 if (!cache[index]) {
                     // Generate a random set of RGB values for the current circle.
                     const random = Math.round((Math.random() * 255));
@@ -84,8 +82,7 @@ export default Canvas = React.createClass({
      */
     getInitialState() {
         return {
-            circles: [], colours: function noop() {
-            }, size: [400, 400]
+            circles: [], colours: () => {}, size: [400, 400]
         };
     },
 
@@ -134,9 +131,7 @@ export default Canvas = React.createClass({
             length = frequencyData.length,
             trebleParts = (length - (length / 4)),
             trebleArray = Array.prototype.slice.call(frequencyData).splice(length - trebleParts),
-            trebleSegment = trebleArray.reduce(function reduce(currentValue, value) {
-                return currentValue + value;
-            }, 0);
+            trebleSegment = trebleArray.reduce((currentValue, value) => currentValue + value, 0);
         if (trebleSegment !== 0) {
             positions.cx += (Math.random() * 190) - 95;
             positions.cy += (Math.random() * 190) - 95;
@@ -149,12 +144,12 @@ export default Canvas = React.createClass({
     },
 
     /**
+     * @see https://css-tricks.com/snippets/javascript/random-hex-color
      * @method getRandomColour
      * @return {String}
      */
     getRandomColour() {
-        const colours = ['267831', 'B1B541', 'FFCD36', 'D60404', '1F0404'];
-        return '#' + colours[Math.floor(Math.random() * colours.length)];
+        return '#' + Math.floor(Math.random()*16777215).toString(16);
     },
 
     /**
