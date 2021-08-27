@@ -1,5 +1,4 @@
-/.idea
-/node_modules
-/example/vendor/*
-!/example/vendor/.gitkeep
-/example/music/*
+.idea
+.parcel-cache
+node_modules
+public

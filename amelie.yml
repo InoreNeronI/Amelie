@@ -1,9 +1,0 @@
-components: module/Amelie.jsx
-
-build:
-  directory: dist
-  copy: example/vendor/amelie
-  development: amelie.jsx
-  production:
-    minified: amelie.min.js
-    unminified: amelie.js
