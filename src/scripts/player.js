@@ -1,13 +1,13 @@
 
 import React from 'react';
-import Visualizer from './visualiser';
+import Visualizer from './visualizer';
 
 /**
  * @module Amelie
  * @author Adam Timberlake
  * @link https://github.com/Wildhoney/Amelie
  */
-export default Player = React.createClass({
+const Player = React.createClass({
 
     /**
      * @method componentDidMount
@@ -52,7 +52,7 @@ export default Player = React.createClass({
         // Audio context instantiation.
         const context = new ContextClass(), analyser = context.createAnalyser();
 
-        // Route the audio source through our visualiser.
+        // Route the audio source through our visualizer.
         const source = context.createMediaElementSource(this.getAudioElement());
         source.connect(analyser)
 
@@ -60,7 +60,7 @@ export default Player = React.createClass({
         analyser.connect(context.destination);
         analyser.fftSize = 128;
 
-        // ...And now we can begin the visualisation rendering!
+        // ...And now we can begin the visualization rendering!
         this.setState({analyser: analyser});
     },
 
@@ -74,8 +74,10 @@ export default Player = React.createClass({
                 <audio>
                     <source src={this.props.audio}/>
                 </audio>
-                <Visualiser analyser={this.state.analyser}/>
+                <Visualizer analyser={this.state.analyser}/>
             </section>
         );
     }
 });
+
+export default Player;

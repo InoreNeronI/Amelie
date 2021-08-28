@@ -8,7 +8,7 @@ import React from 'react';
  * @author Adam Timberlake
  * @link https://github.com/Wildhoney/Amelie
  */
-export default Canvas = React.createClass({
+const Canvas = React.createClass({
 
     /**
      * @method componentDidMount
@@ -181,3 +181,5 @@ export default Canvas = React.createClass({
         );
     }
 });
+
+export default Canvas;

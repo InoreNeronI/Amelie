@@ -4,11 +4,11 @@ import Canvas from './canvas';
 
 /**
  * @module Amelie
- * @submodule Visualiser
+ * @submodule Visualizer
  * @author Adam Timberlake
  * @link https://github.com/Wildhoney/Amelie
  */
-export default Visualiser = React.createClass({
+const Visualizer = React.createClass({
 
     /**
      * @method componentWillReceiveProps
@@ -46,7 +46,7 @@ export default Visualiser = React.createClass({
         const frequencyData = new Uint8Array(analyser.frequencyBinCount);
         analyser.getByteFrequencyData(frequencyData);
 
-        // Define the items required to create the visualisation...
+        // Define the items required to create the visualization...
         this.setState({frequencyData: frequencyData, fftSize: analyser.fftSize});
     },
 
@@ -65,10 +65,12 @@ export default Visualiser = React.createClass({
      */
     render() {
         return (
-            <section className="visualiser" onMouseMove={this.setCursorPosition}>
+            <section className="visualizer" onMouseMove={this.setCursorPosition}>
                 <Canvas frequencyData={this.state.frequencyData} cursor={this.state.cursor}
                         fftSize={this.state.fftSize}/>
             </section>
         );
     }
 });
+
+export default Visualizer;
