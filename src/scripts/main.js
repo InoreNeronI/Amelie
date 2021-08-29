@@ -1,10 +1,10 @@
 
 import React from 'react';
-import Player from './player';
+import Audio from './audio';
 
 // It's time to throw everything to the devil and go to Kislovodsk...
 const node = document.querySelector('#root');
-React.render(<Player audio={node.getAttribute('data-audio')} />, node);
+React.render(<Audio audio={node.getAttribute('data-audio')} />, node);
 
 // @see https://codepen.io/EmNudge/pen/rRbLJQ
 // Possible improvements:

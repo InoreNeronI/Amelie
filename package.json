@@ -16,11 +16,11 @@
     "react": "^0.14.10"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production parcel build src/index.html --dist-dir public --no-source-maps",
+    "build": "cross-env NODE_ENV=production parcel build src/*.html --dist-dir public --no-source-maps",
     "postbuild": "cp -nrv src/media public",
     "prebuild": "rm -fr .parcel-cache public",
     "prestart": "yarn prebuild && mkdir public && yarn postbuild",
-    "start": "cross-env NODE_ENV=development parcel src/index.html --dist-dir public --no-autoinstall --no-source-maps --open"
+    "start": "cross-env NODE_ENV=development parcel src/*.html --dist-dir public --no-autoinstall --no-source-maps --open"
   },
   "alias": {
     "d3": {

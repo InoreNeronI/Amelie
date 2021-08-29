@@ -9,7 +9,6 @@ import Canvas from './canvas';
  * @link https://github.com/Wildhoney/Amelie
  */
 const Visualizer = React.createClass({
-
     /**
      * @method componentWillReceiveProps
      * @param nextProps {Object}

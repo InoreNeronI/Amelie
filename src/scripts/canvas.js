@@ -9,7 +9,6 @@ import React from 'react';
  * @link https://github.com/Wildhoney/Amelie
  */
 const Canvas = React.createClass({
-
     /**
      * @method componentDidMount
      * @return {void}
