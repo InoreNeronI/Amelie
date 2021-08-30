@@ -74,6 +74,15 @@ element.addEventListener(
     false
 );
 
+element.addEventListener(
+    'play',
+    () => {
+        playBtn.classList.remove('play');
+        playBtn.classList.add('pause');
+    },
+    false
+);
+
 player.querySelector('.volume-button').addEventListener('click', () => {
     const volumeEl = player.querySelector('.volume-container .volume');
     element.muted = !element.muted;
