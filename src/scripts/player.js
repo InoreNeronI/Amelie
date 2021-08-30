@@ -15,7 +15,7 @@ element.addEventListener(
             element.duration
         );
         const audioSrc = element.querySelector('source').src;
-        player.querySelector('.name').textContent = audioSrc.substr(audioSrc.lastIndexOf('/')+1);
+        player.querySelector('.name').textContent = window.htmlDecode(audioSrc.substr(audioSrc.lastIndexOf('/')+1));
         element.volume = .75;
     },
     false
@@ -102,4 +102,16 @@ window.getTimeCodeFromNum = (num) => {
     return `${String(hours).padStart(2, 0)}:${minutes}:${String(
         seconds % 60
     ).padStart(2, 0)}`;
+}
+
+/**
+ * @see https://stackoverflow.com/a/1912522
+ * @param {string} input
+ * @returns {string}
+ */
+window.htmlDecode = (input) => {
+    const e = document.createElement('textarea');
+    e.innerHTML = input;
+    // handle case of empty input
+    return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue.replaceAll('%20', ' ');
 }
