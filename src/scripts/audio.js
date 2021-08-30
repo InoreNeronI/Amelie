@@ -45,7 +45,7 @@ const Audio = React.createClass({
 
         if (!ContextClass) {
             // AudioContext API isn't supported.
-            throw "AudioContext API unavailable in current browser. Please try another!";
+            throw 'AudioContext API unavailable in current browser. Please try another!';
         }
 
         // Audio context instantiation.
@@ -69,8 +69,8 @@ const Audio = React.createClass({
      */
     render() {
         return (
-            <section className="main">
-                <audio>
+            <section className='main'>
+                <audio crossOrigin='anonymous'>
                     <source src={this.props.audio}/>
                 </audio>
                 <Visualizer analyser={this.state.analyser}/>

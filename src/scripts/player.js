@@ -9,9 +9,9 @@ const element = document.querySelector('audio');
 const player = document.querySelector('.player');
 
 element.addEventListener(
-    "loadeddata",
+    'loadeddata',
     () => {
-        player.querySelector(".time .length").textContent = window.getTimeCodeFromNum(
+        player.querySelector('.time .length').textContent = window.getTimeCodeFromNum(
             element.duration
         );
         const audioSrc = element.querySelector('source').src;
@@ -22,43 +22,43 @@ element.addEventListener(
 );
 
 //click on timeline to skip around
-const timeline = player.querySelector(".timeline");
-timeline.addEventListener("click", e => {
+const timeline = player.querySelector('.timeline');
+timeline.addEventListener('click', e => {
     const timelineWidth = window.getComputedStyle(timeline).width;
     const timeToSeek = e.offsetX / parseInt(timelineWidth) * element.duration;
     element.currentTime = timeToSeek;
 }, false);
 
 //click volume slider to change volume
-const volumeSlider = player.querySelector(".controls .volume-slider");
+const volumeSlider = player.querySelector('.controls .volume-slider');
 volumeSlider.addEventListener('click', e => {
     const sliderWidth = window.getComputedStyle(volumeSlider).width;
     const newVolume = e.offsetX / parseInt(sliderWidth);
     element.volume = newVolume;
-    player.querySelector(".controls .volume-percentage").style.width = newVolume * 100 + '%';
+    player.querySelector('.controls .volume-percentage').style.width = newVolume * 100 + '%';
 }, false)
 
 //check audio percentage and update time accordingly
 setInterval(() => {
-    const progressBar = player.querySelector(".progress");
-    progressBar.style.width = element.currentTime / element.duration * 100 + "%";
-    player.querySelector(".time .current").textContent = window.getTimeCodeFromNum(
+    const progressBar = player.querySelector('.progress');
+    progressBar.style.width = element.currentTime / element.duration * 100 + '%';
+    player.querySelector('.time .current').textContent = window.getTimeCodeFromNum(
         element.currentTime
     );
 }, 500);
 
 //toggle between playing and pausing on button click
-const playBtn = player.querySelector(".controls .toggle-play");
+const playBtn = player.querySelector('.controls .toggle-play');
 playBtn.addEventListener(
-    "click",
+    'click',
     () => {
         if (element.paused) {
-            playBtn.classList.remove("play");
-            playBtn.classList.add("pause");
+            playBtn.classList.remove('play');
+            playBtn.classList.add('pause');
             element.play();
         } else {
-            playBtn.classList.remove("pause");
-            playBtn.classList.add("play");
+            playBtn.classList.remove('pause');
+            playBtn.classList.add('play');
             element.pause();
         }
     },
@@ -66,23 +66,23 @@ playBtn.addEventListener(
 );
 
 element.addEventListener(
-    "ended",
+    'ended',
     () => {
-        playBtn.classList.remove("pause");
-        playBtn.classList.add("play");
+        playBtn.classList.remove('pause');
+        playBtn.classList.add('play');
     },
     false
 );
 
-player.querySelector(".volume-button").addEventListener("click", () => {
-    const volumeEl = player.querySelector(".volume-container .volume");
+player.querySelector('.volume-button').addEventListener('click', () => {
+    const volumeEl = player.querySelector('.volume-container .volume');
     element.muted = !element.muted;
     if (element.muted) {
-        volumeEl.classList.remove("icono-volumeMedium");
-        volumeEl.classList.add("icono-volumeMute");
+        volumeEl.classList.remove('icono-volumeMedium');
+        volumeEl.classList.add('icono-volumeMute');
     } else {
-        volumeEl.classList.add("icono-volumeMedium");
-        volumeEl.classList.remove("icono-volumeMute");
+        volumeEl.classList.add('icono-volumeMedium');
+        volumeEl.classList.remove('icono-volumeMute');
     }
 });
 

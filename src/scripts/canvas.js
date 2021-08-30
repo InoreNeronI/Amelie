@@ -176,7 +176,7 @@ const Canvas = React.createClass({
         }
 
         return (
-            <div className="canvas-container"/>
+            <div className='canvas-container'/>
         );
     }
 });

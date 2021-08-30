@@ -64,7 +64,7 @@ const Visualizer = React.createClass({
      */
     render() {
         return (
-            <section className="visualizer" onMouseMove={this.setCursorPosition}>
+            <section className='visualizer' onMouseMove={this.setCursorPosition}>
                 <Canvas frequencyData={this.state.frequencyData} cursor={this.state.cursor}
                         fftSize={this.state.fftSize}/>
             </section>
