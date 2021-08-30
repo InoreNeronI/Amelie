@@ -16,7 +16,7 @@ const Audio = React.createClass({
     componentDidMount() {
         // Once the component has been rendered we can listen for the "canplay" event to setup
         // the audio context to begin analysing the audio stream.
-        this.getElement().addEventListener('canplay', this.configureAudioContext);
+        this.getElement().addEventListener('play', this.configureAudioContext);
     },
 
     /**
@@ -36,24 +36,12 @@ const Audio = React.createClass({
     },
 
     /**
-     * @method configureAudioContext
+     * @method configureAudioAnalyser
      * @return {void}
      */
-    configureAudioContext() {
-        // Dependencies for analysing the audio stream.
-        const ContextClass = (AudioContext || mozAudioContext || webkitAudioContext || oAudioContext || msAudioContext);
-
-        if (!ContextClass) {
-            // AudioContext API isn't supported.
-            throw 'AudioContext API unavailable in current browser. Please try another!';
-        }
-
-        // Audio context instantiation.
-        const context = new ContextClass(), analyser = context.createAnalyser();
-
-        // Route the audio source through our visualizer.
-        const source = context.createMediaElementSource(this.getElement());
-        source.connect(analyser)
+    configureAudioAnalyser() {
+        const analyser = window.context.createAnalyser();
+        window.source.connect(analyser)
 
         // Create the analyser object and specify its FFT size in bytes.
         analyser.connect(context.destination);
@@ -61,6 +49,26 @@ const Audio = React.createClass({
 
         // ...And now we can begin the visualization rendering!
         this.setState({analyser: analyser});
+    },
+
+    /**
+     * @method configureAudioContext
+     * @return {void}
+     */
+    configureAudioContext() {
+        if (typeof window.context === 'undefined') {
+            // Dependencies for analysing the audio stream.
+            const ContextClass = (AudioContext || mozAudioContext || webkitAudioContext || oAudioContext || msAudioContext);
+            if (!ContextClass) {
+                // AudioContext API isn't supported.
+                throw 'AudioContext API unavailable in current browser. Please try another!';
+            }
+            // Audio context instantiation.
+            window.context = new ContextClass();
+            // Route the audio source through our visualizer.
+            window.source = context.createMediaElementSource(this.getElement());
+        }
+        this.configureAudioAnalyser();
     },
 
     /**
