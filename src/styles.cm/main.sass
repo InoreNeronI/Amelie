@@ -1,0 +1,53 @@
+
+/* @see https://codepen.io/summercodes/pen/bGqLYmv
+@import '../styles/variables'
+
+body
+  padding: 0
+  margin: 0
+  font: 400 0.7rem / 150% $sans1
+  //text-transform: lowercase
+  letter-spacing: 1.5px
+  background: $lrainbow
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 100vh
+  overflow: hidden
+  //min-width: 500px
+  //width: 100%
+
+*
+  box-sizing: border-box
+
+  &::before, &::after
+    box-sizing: border-box
+
+a
+  text-decoration: none
+
+section
+  &.background
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: transparent url('../images.new/background.jpg') no-repeat
+    background-attachment: fixed
+    background-size: cover
+
+  &.border
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 20001
+    pointer-events: none
+    width: 100%
+    height: 100%
+    box-shadow: inset 0 0 0 5px $white
+
+@import 'player'
+@import 'playlist'
+@import '../styles/visualizer'
+@import '../styles/keyframes'

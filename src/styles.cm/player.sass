@@ -1,0 +1,31 @@
+
+@import '../styles/player'
+
+.player
+  width: 20rem
+  height: 7vmin
+  position: fixed
+  bottom: 4vmin
+  left: 4vmin
+  mix-blend-mode: overlay
+  box-shadow: 0 0 3px 0 rgba($purple, 1)
+  border: 1px solid rgba($blue, 1)
+  border-radius: 11%
+  -webkit-border-radius: 11%
+
+  background: $dpurple
+  background: $rainbow
+  color: $white
+  font-family: inherit
+  font-size: inherit
+  z-index: 102
+
+  .name
+    text-indent: 5rem
+    width: 5rem
+
+@media (max-width: 500px)
+  .player
+    width: 100%
+    bottom: 0.5rem
+    left: 0
