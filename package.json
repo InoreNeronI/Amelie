@@ -6,26 +6,27 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@parcel/transformer-image": "^2.0.0-rc.0",
-    "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "@parcel/transformer-image": "^2.10.2",
+    "@parcel/transformer-sass": "^2.10.2",
     "cross-env": "^7.0.3",
-    "parcel": "^2.0.0-rc.0"
+    "parcel": "^2.10.2"
   },
   "dependencies": {
-    "d3": "^3.5.17",
+    "d3": "^7.8.5",
     "react": "^0.14.10"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production parcel build src/*.html --dist-dir public --no-source-maps",
     "postbuild": "cp -nrv src/media public",
     "prebuild": "rm -fr .parcel-cache public",
-    "prestart": "yarn prebuild && mkdir public && yarn postbuild",
+    "prestart": "npm run prebuild && mkdir public && npm run postbuild",
     "start": "cross-env NODE_ENV=development parcel src/*.html --dist-dir public --no-autoinstall --no-source-maps --open"
   },
   "alias": {
     "d3": {
       "global": "d3"
     },
+    "process": false,
     "react": {
       "global": "React"
     }
