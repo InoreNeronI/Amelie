@@ -2,7 +2,7 @@
   "name": "amelie",
   "version": "1.0.0",
   "description": "HTML5 audio visualizer experiment using D3 with a curious theme.",
-  "repository": "https://github.com/mmozos/Amelie.git",
+  "repository": "https://github.com/InoreNeronI/Amelie.git",
   "license": "MIT",
   "private": true,
   "devDependencies": {
