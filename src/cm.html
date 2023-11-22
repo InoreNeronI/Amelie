@@ -1,68 +1,102 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Chill Mafia Records - EZORREGATIK X BERPIZKUNDEA</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Prettification! -->
     <link rel="icon" type="image/png" href="images.cm/cover.png" />
-    <link rel="stylesheet" href="https://use.typekit.net/kid2tin.css">
-    <link rel="stylesheet" href="styles.cm/main.sass">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/icono/1.3.0/icono.min.css" integrity="sha512-g1h0cHxwdMGiafnhEFEQj3VTRCt/iUzz53rRYpy8x/eL/4E17FbCitBL2RJltJZsCBDyJe3J7ByGpXAF/+zcMw==" crossorigin="anonymous" rel="stylesheet" referrerpolicy="no-referrer">
-</head>
-<body>
+    <link rel="stylesheet" href="https://use.typekit.net/kid2tin.css" />
+    <link rel="stylesheet" href="styles.cm/main.sass" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/icono/1.3.0/icono.min.css"
+      integrity="sha512-g1h0cHxwdMGiafnhEFEQj3VTRCt/iUzz53rRYpy8x/eL/4E17FbCitBL2RJltJZsCBDyJe3J7ByGpXAF/+zcMw=="
+      crossorigin="anonymous"
+      rel="stylesheet"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
     <section class="heading">
-        Chill Mafia Records
-        <cite>EZORREGATIK X BERPIZKUNDEA</cite>
+      Chill Mafia Records
+      <cite>EZORREGATIK X BERPIZKUNDEA</cite>
     </section>
     <div data-audio="media/Beethoven.ogg" id="root"></div>
     <section class="background"></section>
     <section class="border"></section>
     <section class="playlist">
-        <a class="song" href="media/01 Zure Kebapa (ft. Tatxers).mp3"><b>Zure Kebapa (ft. Tatxers)</b></a>
-        <a class="song" href="media/02 Gazte Arruntaren Koplak.mp3"><b>Gazte Arruntaren Koplak</b></a>
-        <a class="song" href="media/03 Hire Mixeria.mp3"><b>Hire Mixeria</b></a>
-        <a class="song" href="media/04 cicatriz.mp3 (ft. Ben Yart).mp3"><b>cicatriz.mp3 (ft. Ben Yart)</b></a>
-        <a class="song" href="media/05 Atzerrian (ft. Erramun Martikorena).mp3"><b>Atzerrian (ft. Erramun Martikorena)</b></a>
-        <a class="song" href="media/06 Marmitako X Punki Reggae Party.mp3"><b>Marmitako X Punki Reggae Party</b></a>
-        <a class="song" href="media/07 31014.mp3"><b>31014</b></a>
-        <a class="song" href="media/08 Papi (ft. Bayero).mp3"><b>Papi (ft. Bayero)</b></a>
-        <a class="song" href="media/09 Doraimon.mp3"><b>Doraimon</b></a>
-        <a class="song" href="media/10 ay q emocion.mp3"><b>ay q emocion</b></a>
+      <a class="song" href="media/01 Zure Kebapa (ft. Tatxers).mp3"
+        ><b>Zure Kebapa (ft. Tatxers)</b></a
+      >
+      <a class="song" href="media/02 Gazte Arruntaren Koplak.mp3"
+        ><b>Gazte Arruntaren Koplak</b></a
+      >
+      <a class="song" href="media/03 Hire Mixeria.mp3"><b>Hire Mixeria</b></a>
+      <a class="song" href="media/04 cicatriz.mp3 (ft. Ben Yart).mp3"
+        ><b>cicatriz.mp3 (ft. Ben Yart)</b></a
+      >
+      <a class="song" href="media/05 Atzerrian (ft. Erramun Martikorena).mp3"
+        ><b>Atzerrian (ft. Erramun Martikorena)</b></a
+      >
+      <a class="song" href="media/06 Marmitako X Punki Reggae Party.mp3"
+        ><b>Marmitako X Punki Reggae Party</b></a
+      >
+      <a class="song" href="media/07 31014.mp3"><b>31014</b></a>
+      <a class="song" href="media/08 Papi (ft. Bayero).mp3"
+        ><b>Papi (ft. Bayero)</b></a
+      >
+      <a class="song" href="media/09 Doraimon.mp3"><b>Doraimon</b></a>
+      <a class="song" href="media/10 ay q emocion.mp3"><b>ay q emocion</b></a>
     </section>
     <!-- @see https://codepen.io/EmNudge/pen/rRbLJQ -->
     <section class="player">
-        <div class="timeline">
-            <div class="progress"></div>
+      <div class="timeline">
+        <div class="progress"></div>
+      </div>
+      <div class="controls">
+        <div class="play-container">
+          <div class="toggle-play play"></div>
         </div>
-        <div class="controls">
-            <div class="play-container">
-                <div class="toggle-play play">
-                </div>
-            </div>
-            <div class="time">
-                <div class="current">0:00</div>
-                <div class="divider">/</div>
-                <div class="length"></div>
-            </div>
-            <!-- @see https://stackoverflow.com/a/16323141 -->
-            <marquee class="name" behavior="scroll" scrollamount="3" direction="left" onmouseover="this.stop();" onmouseout="this.start();"></marquee>
-            <!-- credit for icon to https://saeedalipoor.github.io/icono -->
-            <div class="volume-container">
-                <div class="volume-button">
-                    <div class="volume icono-volumeMedium"></div>
-                </div>
-                <div class="volume-slider">
-                    <div class="volume-percentage"></div>
-                </div>
-            </div>
+        <div class="time">
+          <div class="current">0:00</div>
+          <div class="divider">/</div>
+          <div class="length"></div>
         </div>
+        <!-- @see https://stackoverflow.com/a/16323141 -->
+        <marquee
+          class="name"
+          behavior="scroll"
+          scrollamount="3"
+          direction="left"
+          onmouseover="this.stop();"
+          onmouseout="this.start();"
+        ></marquee>
+        <!-- credit for icon to https://saeedalipoor.github.io/icono -->
+        <div class="volume-container">
+          <div class="volume-button">
+            <div class="volume icono-volumeMedium"></div>
+          </div>
+          <div class="volume-slider">
+            <div class="volume-percentage"></div>
+          </div>
+        </div>
+      </div>
     </section>
     <!-- Scriptalicious! -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js" integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.10/react.min.js" integrity="sha512-QUvwMmNYF05QG0Of++jvKycMrzqWJEvV/4WgkLCQuKoz/RprVCM4b3nFSy8yRqTzqGElKUbJWTQaX3N2llm87w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"
+      integrity="sha512-M7nHCiNUOwFt6Us3r8alutZLm9qMt4s9951uo8jqO4UwJ1hziseL6O3ndFyigx6+LREfZqnhHxYjKRJ8ZQ69DQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.10/react.min.js"
+      integrity="sha512-QUvwMmNYF05QG0Of++jvKycMrzqWJEvV/4WgkLCQuKoz/RprVCM4b3nFSy8yRqTzqGElKUbJWTQaX3N2llm87w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <!-- React.js Application! -->
     <script defer src="scripts/main.js" type="module"></script>
     <script defer src="scripts.cm/main.js" type="module"></script>
-</body>
+  </body>
 </html>

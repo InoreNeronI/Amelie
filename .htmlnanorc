@@ -1,9 +1,8 @@
 {
-    "collapseAttributeWhitespace": false,
-    "collapseBooleanAttributes": false,
+    "collapseAttributeWhitespace": true,
+    "collapseBooleanAttributes": true,
     "collapseWhitespace": true,
-    "custom": [],
-    "deduplicateAttributeValues": false,
+    "deduplicateAttributeValues": true,
     "mergeScripts": false,
     "mergeStyles": false,
     "removeUnusedCss": false,

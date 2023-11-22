@@ -2,25 +2,33 @@
   "name": "amelie",
   "version": "1.0.0",
   "description": "HTML5 audio visualizer experiment using D3 with a curious theme.",
-  "repository": "https://github.com/InoreNeronI/Amelie.git",
+  "homepage": "https://github.com/InoreNeronI/Amelie",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production parcel build src/*.html --dist-dir public --no-source-maps",
+    "postbuild": "cp -nrv src/media public",
+    "prestart": "rm -fr .parcel-cache public && prettier . --write && mkdir public && npm run postbuild",
+    "start": "cross-env NODE_ENV=development parcel serve src/*.html --dist-dir public --no-autoinstall --no-source-maps --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InoreNeronI/Amelie.git"
+  },
+  "keywords": [],
+  "author": "Martin Mozos <martinmozos@gmail.com>",
   "license": "MIT",
-  "private": true,
-  "devDependencies": {
-    "@parcel/transformer-image": "^2.10.3",
-    "@parcel/transformer-sass": "^2.10.3",
-    "cross-env": "^7.0.3",
-    "parcel": "^2.10.3"
+  "bugs": {
+    "url": "https://github.com/InoreNeronI/Amelie/issues"
   },
   "dependencies": {
     "d3": "^7.8.5",
     "react": "^0.14.10"
   },
-  "scripts": {
-    "build": "cross-env NODE_ENV=production parcel build src/*.html --dist-dir public --no-source-maps",
-    "postbuild": "cp -nrv src/media public",
-    "prebuild": "rm -fr .parcel-cache public",
-    "prestart": "npm run prebuild && mkdir public && npm run postbuild",
-    "start": "cross-env NODE_ENV=development parcel src/*.html --dist-dir public --no-autoinstall --no-source-maps --open"
+  "devDependencies": {
+    "@parcel/transformer-image": "^2.10.3",
+    "@parcel/transformer-sass": "^2.10.3",
+    "cross-env": "^7.0.3",
+    "parcel": "^2.10.3",
+    "prettier": "3.1.0"
   },
   "alias": {
     "d3": {
@@ -29,6 +37,11 @@
     "process": false,
     "react": {
       "global": "React"
+    }
+  },
+  "targets": {
+    "default": {
+      "context": "browser"
     }
   }
 }
