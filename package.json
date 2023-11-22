@@ -4,7 +4,7 @@
   "description": "HTML5 audio visualizer experiment using D3 with a curious theme.",
   "homepage": "https://github.com/InoreNeronI/Amelie",
   "scripts": {
-    "build": "cross-env NODE_ENV=production parcel build src/*.html --dist-dir public --no-source-maps",
+    "build": "cross-env NODE_ENV=production parcel build src/*.html --dist-dir public --no-source-maps --public-url /Amelie",
     "postbuild": "cp -nrv src/media public",
     "prestart": "rm -fr .parcel-cache public && prettier . --write && mkdir public && npm run postbuild",
     "start": "cross-env NODE_ENV=development parcel serve src/*.html --dist-dir public --no-autoinstall --no-source-maps --open"
