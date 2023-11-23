@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "d3": "^7.8.5",
-    "react": "^0.14.10"
+    "react": "^15.7.0",
+    "react-dom": "^15.7.0"
   },
   "devDependencies": {
     "@parcel/transformer-image": "^2.10.3",
@@ -37,6 +38,9 @@
     "process": false,
     "react": {
       "global": "React"
+    },
+    "react-dom": {
+      "global": "ReactDOM"
     }
   },
   "targets": {

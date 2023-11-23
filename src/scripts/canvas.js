@@ -1,5 +1,6 @@
 import d3 from 'd3';
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 
 /**
  * @module Amelie
@@ -15,14 +16,14 @@ const Canvas = React.createClass({
   componentDidMount() {
     // Configure the D3 SVG component.
     const d3Element = d3
-      .select(this.getDOMNode())
+      .select(findDOMNode(this))
       .append('svg')
       .attr('width', this.state.size[0])
       .attr('height', this.state.size[1])
       .append('g');
 
-    this.getDOMNode().style.width = this.state.size[0] + 'px';
-    this.getDOMNode().style.height = this.state.size[1] + 'px';
+    findDOMNode(this).style.width = this.state.size[0] + 'px';
+    findDOMNode(this).style.height = this.state.size[1] + 'px';
 
     /**
      * Responsible for generating the greyscale colours for the circle.
@@ -94,7 +95,7 @@ const Canvas = React.createClass({
    */
   renderCircles(frequencyData) {
     if (this.state.circles.length === 0) {
-      // Circles haven't yet been pre-rendered and therefore we're unable to go
+      // Circles haven't yet been pre-rendered, and therefore we're unable to go
       // any further.
       return;
     }
@@ -170,8 +171,8 @@ const Canvas = React.createClass({
    * @return {void}
    */
   positionDOMElement(cursorData) {
-    this.getDOMNode().style.left = cursorData.x - this.state.size[0] / 2 + 'px';
-    this.getDOMNode().style.top = cursorData.y - this.state.size[1] / 2 + 'px';
+    findDOMNode(this).style.left = cursorData.x - this.state.size[0] / 2 + 'px';
+    findDOMNode(this).style.top = cursorData.y - this.state.size[1] / 2 + 'px';
   },
 
   /**

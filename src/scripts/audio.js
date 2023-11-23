@@ -1,4 +1,5 @@
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 import Visualizer from './visualizer';
 
 /**
@@ -13,7 +14,7 @@ const Audio = React.createClass({
    * @return {void}
    */
   componentDidMount() {
-    // Once the component has been rendered we can listen for the "canplay" event to setup
+    // Once the component has been rendered we can listen for the "canplay" event to set up
     // the audio context to begin analysing the audio stream.
     this.getElement().addEventListener('play', this.configureAudioContext);
   },
@@ -31,7 +32,7 @@ const Audio = React.createClass({
    * @return {HTMLElement}
    */
   getElement() {
-    return this.getDOMNode().querySelector('audio');
+    return findDOMNode(document.querySelector('audio'));
   },
 
   /**
