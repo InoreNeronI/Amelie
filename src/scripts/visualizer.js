@@ -1,4 +1,4 @@
-import React from 'react';
+import { createClass } from 'react';
 import Canvas from './canvas';
 
 /**
@@ -7,7 +7,7 @@ import Canvas from './canvas';
  * @author Adam Timberlake
  * @link https://github.com/Wildhoney/Amelie
  */
-const Visualizer = React.createClass({
+const Visualizer = createClass({
   /**
    * @method componentWillReceiveProps
    * @param nextProps {Object}

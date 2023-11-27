@@ -1,4 +1,4 @@
-import React from 'react';
+import { createClass } from 'react';
 import { findDOMNode } from 'react-dom';
 import Visualizer from './visualizer';
 
@@ -8,7 +8,7 @@ import Visualizer from './visualizer';
  * @author Adam Timberlake
  * @link https://github.com/Wildhoney/Amelie
  */
-const Audio = React.createClass({
+const Audio = createClass({
   /**
    * @method componentDidMount
    * @return {void}

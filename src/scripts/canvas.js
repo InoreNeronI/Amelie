@@ -1,5 +1,5 @@
 import d3 from 'd3';
-import React from 'react';
+import { createClass } from 'react';
 import { findDOMNode } from 'react-dom';
 
 /**
@@ -8,7 +8,7 @@ import { findDOMNode } from 'react-dom';
  * @author Adam Timberlake
  * @link https://github.com/Wildhoney/Amelie
  */
-const Canvas = React.createClass({
+const Canvas = createClass({
   /**
    * @method componentDidMount
    * @return {void}
