@@ -5,4 +5,4 @@ import Audio from './audio';
 const node = document.querySelector('#root');
 render(<Audio audio={node.getAttribute('data-audio')} />, node);
 
-require('./player');
+import './player';

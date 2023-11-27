@@ -1,6 +1,6 @@
 // @see https://codepen.io/EmNudge/pen/rRbLJQ
 // Possible improvements:
-// - Change timeline and volume slider into input sliders, reskinned
+// - Change timeline and volume slider into input sliders, skinned
 // - Change into Vue or React component
 // - Hover over sliders to see preview of timestamp/volume change
 
@@ -27,8 +27,8 @@ timeline.addEventListener(
   'click',
   e => {
     const timelineWidth = window.getComputedStyle(timeline).width;
-    const timeToSeek = (e.offsetX / parseInt(timelineWidth)) * element.duration;
-    element.currentTime = timeToSeek;
+    element.currentTime =
+      (e.offsetX / parseInt(timelineWidth)) * element.duration;
   },
   false
 );
@@ -105,21 +105,16 @@ player.querySelector('.volume-button').addEventListener('click', () => {
 });
 
 /**
+ * @see https://stackoverflow.com/a/25279340
  * turn 128 seconds into 2:08
- * @param num
+ * @param seconds
  * @returns {string}
  */
-window.getTimeCodeFromNum = num => {
-  let seconds = parseInt(num);
-  let minutes = parseInt(seconds / 60);
-  seconds -= minutes * 60;
-  const hours = parseInt(minutes / 60);
-  minutes -= hours * 60;
-
-  if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
-  return `${String(hours).padStart(2, 0)}:${minutes}:${String(
-    seconds % 60
-  ).padStart(2, 0)}`;
+window.getTimeCodeFromNum = seconds => {
+  return new Date(parseInt(seconds) * 1000)
+    .toISOString()
+    .slice(11, 19)
+    .replace(/00:/g, '');
 };
 
 /**
