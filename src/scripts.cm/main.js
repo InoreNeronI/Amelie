@@ -9,14 +9,14 @@ const tracks = playlist.getElementsByTagName('a');
 for (const track in tracks) {
   const link = tracks[track];
   if (typeof link === 'function' || typeof link === 'number') continue;
-  link.addEventListener('click', e => {
+  link.addEventListener('click', (e) => {
     e.preventDefault();
     const song = link.getAttribute('href');
     window.run(song, audio, link);
   });
 }
 // Add event to play the next song in the list, and if the song is the last one play the first one again
-audio.addEventListener('ended', e => {
+audio.addEventListener('ended', () => {
   for (const track in tracks) {
     const link = tracks[track];
     let nextTrack = parseInt(track) + 1;
@@ -24,10 +24,7 @@ audio.addEventListener('ended', e => {
     if (!source.src) source.src = tracks[0];
     if (track === (tracks.length - 1).toString()) nextTrack = 0;
     const linkHref = link.getAttribute('href');
-    if (
-      linkHref.substr(linkHref.lastIndexOf('/') + 1) ===
-      source.src.substr(source.src.lastIndexOf('/') + 1)
-    ) {
+    if (linkHref.substr(linkHref.lastIndexOf('/') + 1) === source.src.substr(source.src.lastIndexOf('/') + 1)) {
       const nextLink = tracks[nextTrack];
       window.run(nextLink.getAttribute('href'), audio, nextLink);
       break;

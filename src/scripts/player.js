@@ -10,50 +10,43 @@ const player = document.querySelector('.player');
 element.addEventListener(
   'loadeddata',
   () => {
-    player.querySelector('.time .length').textContent =
-      window.getTimeCodeFromNum(element.duration);
+    player.querySelector('.time .length').textContent = window.getTimeCodeFromNum(element.duration);
     const audioSrc = element.querySelector('source').src;
-    player.querySelector('.name').textContent = window.htmlDecode(
-      audioSrc.substr(audioSrc.lastIndexOf('/') + 1)
-    );
+    player.querySelector('.name').textContent = window.htmlDecode(audioSrc.substr(audioSrc.lastIndexOf('/') + 1));
     element.volume = 0.75;
   },
-  false
+  false,
 );
 
 //click on timeline to skip around
 const timeline = player.querySelector('.timeline');
 timeline.addEventListener(
   'click',
-  e => {
+  (e) => {
     const timelineWidth = window.getComputedStyle(timeline).width;
-    element.currentTime =
-      (e.offsetX / parseInt(timelineWidth)) * element.duration;
+    element.currentTime = (e.offsetX / parseInt(timelineWidth)) * element.duration;
   },
-  false
+  false,
 );
 
 //click volume slider to change volume
 const volumeSlider = player.querySelector('.controls .volume-slider');
 volumeSlider.addEventListener(
   'click',
-  e => {
+  (e) => {
     const sliderWidth = window.getComputedStyle(volumeSlider).width;
     const newVolume = e.offsetX / parseInt(sliderWidth);
     element.volume = newVolume;
-    player.querySelector('.controls .volume-percentage').style.width =
-      newVolume * 100 + '%';
+    player.querySelector('.controls .volume-percentage').style.width = newVolume * 100 + '%';
   },
-  false
+  false,
 );
 
 //check audio percentage and update time accordingly
 setInterval(() => {
   const progressBar = player.querySelector('.progress');
-  progressBar.style.width =
-    (element.currentTime / element.duration) * 100 + '%';
-  player.querySelector('.time .current').textContent =
-    window.getTimeCodeFromNum(element.currentTime);
+  progressBar.style.width = (element.currentTime / element.duration) * 100 + '%';
+  player.querySelector('.time .current').textContent = window.getTimeCodeFromNum(element.currentTime);
 }, 500);
 
 //toggle between playing and pausing on button click
@@ -71,7 +64,7 @@ playBtn.addEventListener(
       element.pause();
     }
   },
-  false
+  false,
 );
 
 element.addEventListener(
@@ -80,7 +73,7 @@ element.addEventListener(
     playBtn.classList.remove('pause');
     playBtn.classList.add('play');
   },
-  false
+  false,
 );
 
 element.addEventListener(
@@ -89,7 +82,7 @@ element.addEventListener(
     playBtn.classList.remove('play');
     playBtn.classList.add('pause');
   },
-  false
+  false,
 );
 
 player.querySelector('.volume-button').addEventListener('click', () => {
@@ -110,11 +103,8 @@ player.querySelector('.volume-button').addEventListener('click', () => {
  * @param seconds
  * @returns {string}
  */
-window.getTimeCodeFromNum = seconds => {
-  return new Date(parseInt(seconds) * 1000)
-    .toISOString()
-    .slice(11, 19)
-    .replace(/00:/g, '');
+window.getTimeCodeFromNum = (seconds) => {
+  return new Date(parseInt(seconds) * 1000).toISOString().slice(11, 19).replace(/00:/g, '');
 };
 
 /**
@@ -122,11 +112,9 @@ window.getTimeCodeFromNum = seconds => {
  * @param {string} input
  * @returns {string}
  */
-window.htmlDecode = input => {
+window.htmlDecode = (input) => {
   const e = document.createElement('textarea');
   e.innerHTML = input;
   // handle case of empty input
-  return e.childNodes.length === 0
-    ? ''
-    : e.childNodes[0].nodeValue.replaceAll('%20', ' ');
+  return e.childNodes.length === 0 ? '' : e.childNodes[0].nodeValue.replaceAll('%20', ' ');
 };

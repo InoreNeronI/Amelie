@@ -1,4 +1,4 @@
-import d3 from 'd3';
+import * as d3 from 'd3';
 import { createClass } from 'react';
 import { findDOMNode } from 'react-dom';
 
@@ -34,7 +34,7 @@ const Canvas = createClass({
     const ColourGenerator = function () {
       const cache = [];
 
-      return index => {
+      return (index) => {
         if (!cache[index]) {
           // Generate a random set of RGB values for the current circle.
           const random = Math.round(Math.random() * 255);
@@ -134,13 +134,8 @@ const Canvas = createClass({
     const positions = this.computeCxCy(),
       length = frequencyData.length,
       trebleParts = length - length / 4,
-      trebleArray = Array.prototype.slice
-        .call(frequencyData)
-        .splice(length - trebleParts),
-      trebleSegment = trebleArray.reduce(
-        (currentValue, value) => currentValue + value,
-        0
-      );
+      trebleArray = Array.prototype.slice.call(frequencyData).splice(length - trebleParts),
+      trebleSegment = trebleArray.reduce((currentValue, value) => currentValue + value, 0);
     if (trebleSegment !== 0) {
       positions.cx += Math.random() * 190 - 95;
       positions.cy += Math.random() * 190 - 95;

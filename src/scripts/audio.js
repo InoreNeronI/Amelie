@@ -58,12 +58,7 @@ const Audio = createClass({
   configureAudioContext() {
     if (typeof window.context === 'undefined') {
       // Dependencies for analysing the audio stream.
-      const ContextClass =
-        AudioContext ||
-        mozAudioContext ||
-        webkitAudioContext ||
-        oAudioContext ||
-        msAudioContext;
+      const ContextClass = AudioContext || mozAudioContext || webkitAudioContext || oAudioContext || msAudioContext;
       if (!ContextClass) {
         // AudioContext API isn't supported.
         throw 'AudioContext API unavailable in current browser. Please try another!';

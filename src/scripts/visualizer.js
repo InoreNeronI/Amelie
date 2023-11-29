@@ -36,11 +36,7 @@ const Visualizer = createClass({
    */
   analyseAudioStream(analyser) {
     // Round and round we go...
-    (
-      requestAnimationFrame ||
-      mozRequestAnimationFrame ||
-      webkitRequestAnimationFrame
-    )(() => {
+    (requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame)(() => {
       this.analyseAudioStream(analyser);
     });
 
@@ -68,11 +64,7 @@ const Visualizer = createClass({
   render() {
     return (
       <section className="visualizer" onMouseMove={this.setCursorPosition}>
-        <Canvas
-          frequencyData={this.state.frequencyData}
-          cursor={this.state.cursor}
-          fftSize={this.state.fftSize}
-        />
+        <Canvas frequencyData={this.state.frequencyData} cursor={this.state.cursor} fftSize={this.state.fftSize} />
       </section>
     );
   },
