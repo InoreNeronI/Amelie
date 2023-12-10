@@ -16,9 +16,10 @@
     "import/no-unresolved": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/media-has-caption": "off",
+    "no-redeclare": "warn",
     "no-undef": "warn",
     "no-unused-vars": [
-      "error",
+      "warn",
       {
         "args": "after-used",
         "argsIgnorePattern": "^_",
