@@ -1,8 +1,8 @@
 // @see https://codepen.io/at80/pen/kyOdeK
 
 // Utilities
-var Vector3 = {};
-var Matrix44 = {};
+const Vector3 = {};
+const Matrix44 = {};
 Vector3.create = function (x, y, z) {
   return { x: x, y: y, z: z };
 };
@@ -15,7 +15,7 @@ Vector3.cross = function (v, v0, v1) {
   v.z = v0.x * v1.y - v0.y * v1.x;
 };
 Vector3.normalize = function (v) {
-  var l = v.x * v.x + v.y * v.y + v.z * v.z;
+  let l = v.x * v.x + v.y * v.y + v.z * v.z;
   if (l > 0.00001) {
     l = 1.0 / Math.sqrt(l);
     v.x *= l;
@@ -37,8 +37,8 @@ Matrix44.createIdentity = function () {
   return new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]);
 };
 Matrix44.loadProjection = function (m, aspect, vdeg, near, far) {
-  var h = near * Math.tan(((vdeg * Math.PI) / 180.0) * 0.5) * 2.0;
-  var w = h * aspect;
+  const h = near * Math.tan(((vdeg * Math.PI) / 180.0) * 0.5) * 2.0;
+  const w = h * aspect;
 
   m[0] = (2.0 * near) / w;
   m[1] = 0.0;
@@ -61,12 +61,12 @@ Matrix44.loadProjection = function (m, aspect, vdeg, near, far) {
   m[15] = 0.0;
 };
 Matrix44.loadLookAt = function (m, vpos, vlook, vup) {
-  var frontv = Vector3.create(vpos.x - vlook.x, vpos.y - vlook.y, vpos.z - vlook.z);
+  const frontv = Vector3.create(vpos.x - vlook.x, vpos.y - vlook.y, vpos.z - vlook.z);
   Vector3.normalize(frontv);
-  var sidev = Vector3.create(1.0, 0.0, 0.0);
+  const sidev = Vector3.create(1.0, 0.0, 0.0);
   Vector3.cross(sidev, vup, frontv);
   Vector3.normalize(sidev);
-  var topv = Vector3.create(1.0, 0.0, 0.0);
+  const topv = Vector3.create(1.0, 0.0, 0.0);
   Vector3.cross(topv, frontv, sidev);
   Vector3.normalize(topv);
 
@@ -92,7 +92,7 @@ Matrix44.loadLookAt = function (m, vpos, vlook, vup) {
 };
 
 //
-var timeInfo = {
+const timeInfo = {
   start: 0,
   prev: 0, // Date
   delta: 0,
@@ -100,8 +100,8 @@ var timeInfo = {
 };
 
 //
-var gl;
-var renderSpec = {
+let gl;
+const renderSpec = {
   width: 0,
   height: 0,
   aspect: 1,
@@ -133,7 +133,7 @@ function deleteRenderTarget(rt) {
 }
 
 function createRenderTarget(w, h) {
-  var ret = {
+  const ret = {
     width: w,
     height: h,
     sizeArray: new Float32Array([w, h, w / h]),
@@ -165,13 +165,13 @@ function createRenderTarget(w, h) {
 }
 
 function compileShader(shtype, shsrc) {
-  var retsh = gl.createShader(shtype);
+  const retsh = gl.createShader(shtype);
 
   gl.shaderSource(retsh, shsrc);
   gl.compileShader(retsh);
 
   if (!gl.getShaderParameter(retsh, gl.COMPILE_STATUS)) {
-    var errlog = gl.getShaderInfoLog(retsh);
+    const errlog = gl.getShaderInfoLog(retsh);
     gl.deleteShader(retsh);
     console.error(errlog);
     return null;
@@ -180,14 +180,14 @@ function compileShader(shtype, shsrc) {
 }
 
 function createShader(vtxsrc, frgsrc, uniformlist, attrlist) {
-  var vsh = compileShader(gl.VERTEX_SHADER, vtxsrc);
-  var fsh = compileShader(gl.FRAGMENT_SHADER, frgsrc);
+  const vsh = compileShader(gl.VERTEX_SHADER, vtxsrc);
+  const fsh = compileShader(gl.FRAGMENT_SHADER, frgsrc);
 
   if (vsh == null || fsh == null) {
     return null;
   }
 
-  var prog = gl.createProgram();
+  const prog = gl.createProgram();
   gl.attachShader(prog, vsh);
   gl.attachShader(prog, fsh);
 
@@ -196,7 +196,7 @@ function createShader(vtxsrc, frgsrc, uniformlist, attrlist) {
 
   gl.linkProgram(prog);
   if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-    var errlog = gl.getProgramInfoLog(prog);
+    const errlog = gl.getProgramInfoLog(prog);
     console.error(errlog);
     return null;
   }
@@ -210,8 +210,8 @@ function createShader(vtxsrc, frgsrc, uniformlist, attrlist) {
 
   if (attrlist) {
     prog.attributes = {};
-    for (var i = 0; i < attrlist.length; i++) {
-      var attr = attrlist[i];
+    for (let i = 0; i < attrlist.length; i++) {
+      const attr = attrlist[i];
       prog.attributes[attr] = gl.getAttribLocation(prog, attr);
     }
   }
@@ -221,25 +221,25 @@ function createShader(vtxsrc, frgsrc, uniformlist, attrlist) {
 
 function useShader(prog) {
   gl.useProgram(prog);
-  for (var attr in prog.attributes) {
+  for (let attr in prog.attributes) {
     gl.enableVertexAttribArray(prog.attributes[attr]);
   }
 }
 
 function unuseShader(prog) {
-  for (var attr in prog.attributes) {
+  for (let attr in prog.attributes) {
     gl.disableVertexAttribArray(prog.attributes[attr]);
   }
   gl.useProgram(null);
 }
 
 /////
-var projection = {
+const projection = {
   angle: 60,
   nearfar: new Float32Array([0.1, 100.0]),
   matrix: Matrix44.createIdentity(),
 };
-var camera = {
+const camera = {
   position: Vector3.create(0, 0, 100),
   lookat: Vector3.create(0, 0, 0),
   up: Vector3.create(0, 1, 0),
@@ -247,11 +247,11 @@ var camera = {
   matrix: Matrix44.createIdentity(),
 };
 
-var pointFlower = {};
-var meshFlower = {};
-var sceneStandBy = false;
+const pointFlower = {};
+const meshFlower = {};
+let sceneStandBy = false;
 
-var BlossomParticle = function () {
+const BlossomParticle = function () {
   this.velocity = new Array(3);
   this.rotation = new Array(3);
   this.position = new Array(3);
@@ -301,11 +301,11 @@ BlossomParticle.prototype.update = function (dt, et) {
 
 function createPointFlowers() {
   // get point sizes
-  var prm = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE);
+  const prm = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE);
   renderSpec.pointSize = { min: prm[0], max: prm[1] };
 
-  var vtxsrc = document.getElementById('sakura_point_vsh').textContent;
-  var frgsrc = document.getElementById('sakura_point_fsh').textContent;
+  const vtxsrc = document.getElementById('sakura_point_vsh').textContent;
+  const frgsrc = document.getElementById('sakura_point_fsh').textContent;
 
   pointFlower.program = createShader(
     vtxsrc,
@@ -334,7 +334,7 @@ function createPointFlowers() {
 
   unuseShader(pointFlower.program);
 
-  for (var i = 0; i < pointFlower.numFlowers; i++) {
+  for (let i = 0; i < pointFlower.numFlowers; i++) {
     pointFlower.particles[i] = new BlossomParticle();
   }
 }
@@ -349,14 +349,14 @@ function initPointFlowers() {
   pointFlower.fader.z = 0.1; //near fade start
 
   //particles
-  var PI2 = Math.PI * 2.0;
-  var tmpv3 = Vector3.create(0, 0, 0);
-  var tmpv = 0;
-  var symmetryrand = function () {
+  const PI2 = Math.PI * 2.0;
+  const tmpv3 = Vector3.create(0, 0, 0);
+  let tmpv = 0;
+  const symmetryrand = function () {
     return Math.random() * 2.0 - 1.0;
   };
-  for (var i = 0; i < pointFlower.numFlowers; i++) {
-    var tmpprtcl = pointFlower.particles[i];
+  for (let i = 0; i < pointFlower.numFlowers; i++) {
+    const tmpprtcl = pointFlower.particles[i];
 
     //velocity
     tmpv3.x = symmetryrand() * 0.3 + 0.8;
@@ -390,9 +390,9 @@ function initPointFlowers() {
 
 function renderPointFlowers() {
   //update
-  var PI2 = Math.PI * 2.0;
-  var limit = [pointFlower.area.x, pointFlower.area.y, pointFlower.area.z];
-  var repeatPos = function (prt, cmp, limit) {
+  const PI2 = Math.PI * 2.0;
+  const limit = [pointFlower.area.x, pointFlower.area.y, pointFlower.area.z];
+  const repeatPos = function (prt, cmp, limit) {
     if (Math.abs(prt.position[cmp]) - prt.size * 0.5 > limit) {
       //out of area
       if (prt.position[cmp] > 0) {
@@ -402,15 +402,15 @@ function renderPointFlowers() {
       }
     }
   };
-  var repeatEuler = function (prt, cmp) {
+  const repeatEuler = function (prt, cmp) {
     prt.euler[cmp] = prt.euler[cmp] % PI2;
     if (prt.euler[cmp] < 0.0) {
       prt.euler[cmp] += PI2;
     }
   };
 
-  for (var i = 0; i < pointFlower.numFlowers; i++) {
-    var prtcl = pointFlower.particles[i];
+  for (let i = 0; i < pointFlower.numFlowers; i++) {
+    const prtcl = pointFlower.particles[i];
     prtcl.update(timeInfo.delta, timeInfo.elapsed);
     repeatPos(prtcl, 0, pointFlower.area.x);
     repeatPos(prtcl, 1, pointFlower.area.y);
@@ -434,11 +434,11 @@ function renderPointFlowers() {
   });
 
   // update data
-  var ipos = pointFlower.positionArrayOffset;
-  var ieuler = pointFlower.eulerArrayOffset;
-  var imisc = pointFlower.miscArrayOffset;
-  for (var i = 0; i < pointFlower.numFlowers; i++) {
-    var prtcl = pointFlower.particles[i];
+  let ipos = pointFlower.positionArrayOffset;
+  let ieuler = pointFlower.eulerArrayOffset;
+  let imisc = pointFlower.miscArrayOffset;
+  for (let i = 0; i < pointFlower.numFlowers; i++) {
+    const prtcl = pointFlower.particles[i];
     pointFlower.dataArray[ipos] = prtcl.position[0];
     pointFlower.dataArray[ipos + 1] = prtcl.position[1];
     pointFlower.dataArray[ipos + 2] = prtcl.position[2];
@@ -457,7 +457,7 @@ function renderPointFlowers() {
   //gl.disable(gl.DEPTH_TEST);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
-  var prog = pointFlower.program;
+  const prog = pointFlower.program;
   useShader(prog);
 
   gl.uniformMatrix4fv(prog.uniforms.uProjection, false, projection.matrix);
@@ -495,8 +495,8 @@ function renderPointFlowers() {
   );
 
   // doubler
-  for (var i = 1; i < 2; i++) {
-    var zpos = i * -2.0;
+  for (let i = 1; i < 2; i++) {
+    const zpos = i * -2.0;
     pointFlower.offset[0] = pointFlower.area.x * -1.0;
     pointFlower.offset[1] = pointFlower.area.y * -1.0;
     pointFlower.offset[2] = pointFlower.area.z * zpos;
@@ -539,12 +539,12 @@ function renderPointFlowers() {
 // effects
 //common util
 function createEffectProgram(vtxsrc, frgsrc, exunifs, exattrs) {
-  var ret = {};
-  var unifs = ['uResolution', 'uSrc', 'uDelta'];
+  const ret = {};
+  let unifs = ['uResolution', 'uSrc', 'uDelta'];
   if (exunifs) {
     unifs = unifs.concat(exunifs);
   }
-  var attrs = ['aPosition'];
+  let attrs = ['aPosition'];
   if (exattrs) {
     attrs = attrs.concat(exattrs);
   }
@@ -570,7 +570,7 @@ function createEffectProgram(vtxsrc, frgsrc, exunifs, exattrs) {
 // unuseEffect(prog)
 // TEXTURE0 makes src
 function useEffect(fxobj, srctex) {
-  var prog = fxobj.program;
+  const prog = fxobj.program;
   useShader(prog);
   gl.uniform3fv(prog.uniforms.uResolution, renderSpec.array);
 
@@ -591,11 +591,11 @@ function unuseEffect(fxobj) {
   unuseShader(fxobj.program);
 }
 
-var effectLib = {};
+const effectLib = {};
 function createEffectLib() {
-  var vtxsrc, frgsrc;
+  let vtxsrc, frgsrc;
   //common
-  var cmnvtxsrc = document.getElementById('fx_common_vsh').textContent;
+  const cmnvtxsrc = document.getElementById('fx_common_vsh').textContent;
 
   //background
   frgsrc = document.getElementById('bg_fsh').textContent;
@@ -634,7 +634,7 @@ function renderBackground() {
 }
 
 // post process
-var postProcess = {};
+const postProcess = {};
 function createPostProcess() {
   //console.log("create post process");
 }
@@ -645,7 +645,7 @@ function initPostProcess() {
 function renderPostProcess() {
   gl.enable(gl.TEXTURE_2D);
   gl.disable(gl.DEPTH_TEST);
-  var bindRT = function (rt, isclear) {
+  const bindRT = function (rt, isclear) {
     gl.bindFramebuffer(gl.FRAMEBUFFER, rt.frameBuffer);
     gl.viewport(0, 0, rt.width, rt.height);
     if (isclear) {
@@ -661,9 +661,9 @@ function renderPostProcess() {
   unuseEffect(effectLib.mkBrightBuf);
 
   // make bloom
-  for (var i = 0; i < 2; i++) {
-    var p = 1.5 + 1 * i;
-    var s = 2.0 + 1 * i;
+  for (let i = 0; i < 2; i++) {
+    const p = 1.5 + 1 * i;
+    const s = 2.0 + 1 * i;
     bindRT(renderSpec.wHalfRT1, true);
     useEffect(effectLib.dirBlur, renderSpec.wHalfRT0);
     gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, p, 0.0, s, 0.0);
@@ -693,7 +693,7 @@ function renderPostProcess() {
 }
 
 /////
-var SceneEnv = {};
+const SceneEnv = {};
 function createScene() {
   createEffectLib();
   createBackground();
@@ -751,9 +751,11 @@ function setViewports() {
   gl.clearColor(0.2, 0.2, 0.5, 1.0);
   gl.viewport(0, 0, renderSpec.width, renderSpec.height);
 
-  var rtfunc = function (rtname, rtw, rth) {
-    var rt = renderSpec[rtname];
-    if (rt) deleteRenderTarget(rt);
+  const rtfunc = function (rtname, rtw, rth) {
+    const rt = renderSpec[rtname];
+    if (rt) {
+      deleteRenderTarget(rt);
+    }
     renderSpec[rtname] = createRenderTarget(rtw, rth);
   };
   rtfunc('mainRT', renderSpec.width, renderSpec.height);
@@ -767,21 +769,25 @@ function render() {
   renderScene();
 }
 
-var animating = true;
+let animating = true;
 function toggleAnimation(elm) {
   animating ^= true;
-  if (animating) animate();
+  if (animating) {
+    animate();
+  }
   if (elm) {
     elm.innerHTML = animating ? 'Stop' : 'Start';
   }
 }
 
 function stepAnimation() {
-  if (!animating) animate();
+  if (!animating) {
+    animate();
+  }
 }
 
 function animate() {
-  var curdate = new Date();
+  const curdate = new Date();
   timeInfo.elapsed = (curdate - timeInfo.start) / 1000.0;
   timeInfo.delta = (curdate - timeInfo.prev) / 1000.0;
   timeInfo.prev = curdate;
@@ -791,8 +797,8 @@ function animate() {
 }
 
 function makeCanvasFullScreen(canvas) {
-  var b = document.body;
-  var d = document.documentElement;
+  const b = document.body;
+  const d = document.documentElement;
   fullw = Math.max(b.clientWidth, b.scrollWidth, d.scrollWidth, d.clientWidth);
   fullh = Math.max(b.clientHeight, b.scrollHeight, d.scrollHeight, d.clientHeight);
   canvas.width = fullw;
@@ -800,7 +806,7 @@ function makeCanvasFullScreen(canvas) {
 }
 
 window.addEventListener('load', function (e) {
-  var canvas = document.getElementById('sakura');
+  const canvas = document.getElementById('sakura');
   try {
     makeCanvasFullScreen(canvas);
     gl = canvas.getContext('experimental-webgl');
