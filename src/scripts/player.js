@@ -55,13 +55,16 @@ playBtn.addEventListener(
   'click',
   () => {
     if (element.paused) {
-      playBtn.classList.remove('play');
-      playBtn.classList.add('pause');
-      element.play();
+      element.play().then(() => {
+        playBtn.classList.remove('play');
+        playBtn.classList.add('pause');
+        document.body.classList.remove('not-loaded');
+      });
     } else {
+      element.pause();
       playBtn.classList.remove('pause');
       playBtn.classList.add('play');
-      element.pause();
+      document.body.classList.add('not-loaded');
     }
   },
   false,
@@ -72,6 +75,7 @@ element.addEventListener(
   () => {
     playBtn.classList.remove('pause');
     playBtn.classList.add('play');
+    document.body.classList.add('not-loaded');
   },
   false,
 );
