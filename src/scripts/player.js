@@ -58,7 +58,7 @@ playBtn.addEventListener(
       element.play().then(() => {
         playBtn.classList.remove('play');
         playBtn.classList.add('pause');
-        document.body.classList.remove('not-loaded');
+        setTimeout(() => document.body.classList.remove('not-loaded'), 1500);
       });
     } else {
       element.pause();
