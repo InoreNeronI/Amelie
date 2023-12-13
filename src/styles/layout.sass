@@ -6,7 +6,7 @@ header
   z-index: 1001
   top: 1.25rem
   right: 1.25rem
-  color: $black
+  color: rgba($black, .85)
   text-align: right
 
   h1
@@ -20,10 +20,10 @@ header
     font-weight: normal
     letter-spacing: 1px
     font-size: 1rem
-    color: rgba($black, 0.5)
+    color: rgba($black, .65)
 
     a
-      color: rgba($black, 0.5)
+      color: rgba($black, .65)
 
 /* Background & Border & Soundtrack
 
@@ -45,7 +45,7 @@ section
     pointer-events: none
     width: 100%
     height: 100%
-    box-shadow: inset 0 0 0 5px $black
+    box-shadow: inset 0 0 0 .25rem rgba($black, .65)
 
   &.soundtrack
     display: flex
@@ -54,20 +54,24 @@ section
     z-index: 1001
     bottom: 1.25rem
     right: 1.25rem
-    background-color: rgba(0, 0, 0, 0.5)
-    padding: 10px
+    background-color: rgba($black, .5)
+    padding: 1rem
+    border-radius: .25rem
+
 
     img
-      width: 100px
+      width: 120px
       float: left
       overflow: hidden
-      border: 3px solid white
+      border: 2.5px solid $white
+      border-radius: 3rem
 
     ul.information
       list-style-type: none
       float: left
       overflow: hidden
-      margin-left: 0.5rem
+      margin-left: .5rem
+      width: 100%
 
       li
         font-family: $sans1
@@ -81,3 +85,19 @@ section
           text-transform: uppercase
           color: lightgray
           font-size: 11px
+
+@media (max-width: 520px)
+  section
+    &.soundtrack
+      bottom: .5rem
+      right: .5rem
+      padding: .5rem
+      width: calc(100vw - 1rem)
+      .player
+        .controls
+          flex-direction: column
+          padding: .75rem .75rem 0 .75rem
+          .volume-container
+            .volume-slider
+              position: unset
+              left: unset
