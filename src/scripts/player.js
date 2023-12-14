@@ -6,6 +6,7 @@
 
 const element = document.querySelector('audio');
 const player = document.querySelector('.player');
+const volumeEl = player.querySelector('.volume-container .volume');
 
 element.addEventListener(
   'loadeddata',
@@ -38,6 +39,11 @@ volumeSlider.addEventListener(
     const newVolume = e.offsetX / parseInt(sliderWidth);
     element.volume = newVolume;
     player.querySelector('.controls .volume-percentage').style.width = newVolume * 100 + '%';
+    if (element.muted) {
+      element.muted = false;
+      volumeEl.classList.add('icono-volumeMedium');
+      volumeEl.classList.remove('icono-volumeMute');
+    }
   },
   false,
 );
@@ -90,7 +96,6 @@ element.addEventListener(
 );
 
 player.querySelector('.volume-button').addEventListener('click', () => {
-  const volumeEl = player.querySelector('.volume-container .volume');
   element.muted = !element.muted;
   if (element.muted) {
     volumeEl.classList.remove('icono-volumeMedium');

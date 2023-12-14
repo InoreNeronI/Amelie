@@ -2,15 +2,17 @@
 @import '../styles/player'
 
 .player
+  color: $dpurple
+  font-weight: bold
   width: 20rem
   height: 7vmin
   position: fixed
   bottom: 4vmin
   left: 4vmin
   box-shadow: 0 0 3px 0 rgba($purple, 1)
+  text-shadow: 1.5px 0 $white, -1.5px 0 $white, 0 1.5px $white, 0 -1.5px $white, .75px .75px $white, -.75px -.75px $white, .75px -.75px $white, -.75px .75px $white
 
   background: $rainbow
-  color: $white
   font-family: inherit
   font-size: inherit
   z-index: 102
@@ -19,6 +21,17 @@
     padding: 0 1.25rem
     .name
       width: 5rem
+    .volume-container
+      .volume-button
+        .icono-volumeMedium::before
+          left: .5rem
+      .volume-slider
+        .volume-percentage
+          background: $dpurple
+      &:hover
+        .volume-slider
+          background: $rainbow
+          border: 1.5px solid $white
 
   .timeline
     .progress
