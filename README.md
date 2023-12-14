@@ -13,8 +13,8 @@ HTML5's
 
 You're more than welcome to run the example yourself locally &ndash; simply
 clone the repository and run `npm start` from your terminal &ndash; `npm start`
-uses [Foreman](http://theforeman.org) for running the example on
-[`0.0.0.0:5000`](http://127.0.0.1:5000).
+uses [Parcel](https://parceljs.org) for running the example on
+[`0.0.0.0:1234`](http://127.0.0.1:1234).
 
 # Module
 
