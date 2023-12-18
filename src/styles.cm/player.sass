@@ -22,16 +22,16 @@
     .name
       width: 5rem
     .volume-container
+      &:hover
+        .volume-slider
+          background: $rainbow
+          border: 1.5px solid $white
       .volume-button
         .icono-volumeMedium::before
           left: .5rem
       .volume-slider
         .volume-percentage
           background: $dpurple
-      &:hover
-        .volume-slider
-          background: $rainbow
-          border: 1.5px solid $white
 
   .timeline
     .progress
